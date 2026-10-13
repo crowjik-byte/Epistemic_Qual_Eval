@@ -24,6 +24,10 @@ Run local checks without API access:
 python -m unittest discover -s tests -v
 ```
 
+## Contributing (humans and AI agents)
+
+Shared rules for Claude Code, Codex, and people are in [AGENTS.md](AGENTS.md). Before each commit, install the dev tools once with `python -m pip install -e '.[dev]'`, then run `scripts/check.sh` (Ruff lint, Ruff format, and tests). CI runs the same script.
+
 ## Where things go
 
 | Path | Purpose |

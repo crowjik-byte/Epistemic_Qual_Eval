@@ -1,12 +1,13 @@
 """No network or API credentials required."""
+
 import csv
 import importlib.util
 import json
-from pathlib import Path
 import subprocess
 import sys
 import tempfile
 import unittest
+from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / 'src' / 'epistemic_judge.py'
@@ -22,22 +23,48 @@ class JudgeTests(unittest.TestCase):
             with path.open('w', newline='', encoding='utf-8') as f:
                 writer = csv.DictWriter(f, fieldnames=list(judge.FIELDS) + ['human_verdict'])
                 writer.writeheader()
-                writer.writerow(dict(case_id='C1', question='Assess this.', account_text='A claim.',
-                                     rating='2', reason='A reason.', human_verdict='PRIVATE_SENTINEL'))
+                writer.writerow(
+                    dict(
+                        case_id='C1',
+                        question='Assess this.',
+                        account_text='A claim.',
+                        rating='2',
+                        reason='A reason.',
+                        human_verdict='PRIVATE_SENTINEL',
+                    )
+                )
             cases = judge.load_cases(path, set(), 0)
             self.assertEqual(set(cases[0]), set(judge.FIELDS))
             self.assertNotIn('PRIVATE_SENTINEL', judge.user_prompt(cases[0]))
 
     def test_invented_quote_and_inconsistent_verdict_are_rejected(self):
-        case = dict(case_id='C1', question='Assess this.', account_text='Below awareness.',
-                    rating='2', reason='Therefore impossible to study.')
-        result = dict(case_id='C1', question_standard='Testability', verdict='supported_failure',
-                      findings=[dict(code='ACCESS_LEAP', reason_quote='impossible to study',
-                                     source_field='account_text', source_quote='Below awareness.',
-                                     explanation='A leap.', strongest_defense='Limited access.',
-                                     defense_assessment='Does not establish impossibility.')],
-                      rationale='Fixture.', materiality='weakens_justification',
-                      uncertainty_reasons=[], other_issues=[])
+        case = dict(
+            case_id='C1',
+            question='Assess this.',
+            account_text='Below awareness.',
+            rating='2',
+            reason='Therefore impossible to study.',
+        )
+        result = dict(
+            case_id='C1',
+            question_standard='Testability',
+            verdict='supported_failure',
+            findings=[
+                dict(
+                    code='ACCESS_LEAP',
+                    reason_quote='impossible to study',
+                    source_field='account_text',
+                    source_quote='Below awareness.',
+                    explanation='A leap.',
+                    strongest_defense='Limited access.',
+                    defense_assessment='Does not establish impossibility.',
+                )
+            ],
+            rationale='Fixture.',
+            materiality='weakens_justification',
+            uncertainty_reasons=[],
+            other_issues=[],
+        )
         self.assertEqual(judge.validate_result(result, case), [])
         result['findings'][0]['reason_quote'] = 'Fabricated evidence'
         self.assertTrue(judge.validate_result(result, case))
@@ -45,9 +72,17 @@ class JudgeTests(unittest.TestCase):
         result['verdict'] = 'no_failure_established'
         self.assertTrue(judge.validate_result(result, case))
 
-    @unittest.skipUnless(all((ROOT / p).exists() for p in (
-        "data/judge_development.csv", "data/judge_reserved.csv",
-        "review/round_01/review_cases.csv")), "Local research data not installed")
+    @unittest.skipUnless(
+        all(
+            (ROOT / p).exists()
+            for p in (
+                'data/judge_development.csv',
+                'data/judge_reserved.csv',
+                'review/round_01/review_cases.csv',
+            )
+        ),
+        'Local research data not installed',
+    )
     def test_review_cases_are_exact_development_subsets(self):
         dev = judge.load_cases(ROOT / 'data/judge_development.csv', set(), 0)
         reserved = judge.load_cases(ROOT / 'data/judge_reserved.csv', set(), 0)
@@ -57,8 +92,10 @@ class JudgeTests(unittest.TestCase):
         self.assertFalse(set(by_id) & {r['case_id'] for r in reserved})
         for row in review:
             self.assertEqual(row, by_id[row['case_id']])
-        self.assertFalse({(r['question'], r['account_text']) for r in dev} &
-                         {(r['question'], r['account_text']) for r in reserved})
+        self.assertFalse(
+            {(r['question'], r['account_text']) for r in dev}
+            & {(r['question'], r['account_text']) for r in reserved}
+        )
 
     def test_dry_run_and_overwrite_protection(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -67,12 +104,26 @@ class JudgeTests(unittest.TestCase):
                 writer = csv.DictWriter(f, fieldnames=judge.FIELDS)
                 writer.writeheader()
                 for cid in ('C1', 'C2'):
-                    writer.writerow(dict(case_id=cid, question='Assess this.',
-                                         account_text='A claim.', rating='2', reason='A reason.'))
+                    writer.writerow(
+                        dict(
+                            case_id=cid,
+                            question='Assess this.',
+                            account_text='A claim.',
+                            rating='2',
+                            reason='A reason.',
+                        )
+                    )
             output = Path(tmp) / 'preview'
-            cmd = [sys.executable, str(SCRIPT), '--input',
-                   str(input_path),
-                   '--output-dir', str(output), '--limit', '2']
+            cmd = [
+                sys.executable,
+                str(SCRIPT),
+                '--input',
+                str(input_path),
+                '--output-dir',
+                str(output),
+                '--limit',
+                '2',
+            ]
             first = subprocess.run(cmd, capture_output=True, text=True)
             self.assertEqual(first.returncode, 0, first.stderr)
             self.assertIn('No API calls made', first.stdout)
