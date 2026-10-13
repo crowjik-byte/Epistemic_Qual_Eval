@@ -1,0 +1,31 @@
+[project]
+name = "epistemic-qual-eval"
+version = "0.1.0"
+description = "Draft judge for the epistemic quality of LLM answers to difficult questions."
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+# Development tooling only; the judge itself uses the standard library.
+dev = ["ruff==0.16.8"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # import sorting
+    "B",   # bugbear: likely bugs
+    "UP",  # pyupgrade: modern syntax for the target version
+    "SIM", # simplifications
+]
+# The formatter wraps code; long string literals are left to judgment.
+ignore = ["E501"]
+
+[tool.ruff.format]
+quote-style = "single"
