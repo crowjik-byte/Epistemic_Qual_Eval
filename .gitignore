@@ -218,3 +218,19 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Epistemic evaluation local files
+.env.*
+!.env.example
+/runs/
+/private/
+/data/raw/
+**/private_case_lookup.csv
+**/merged_coded.csv
+
+
+# Local research payloads pending publication approval
+/data/judge_development.csv
+/data/judge_reserved.csv
+/review/**/Review_Packet.md
+/review/**/*.csv
