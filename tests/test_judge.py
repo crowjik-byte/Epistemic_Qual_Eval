@@ -51,7 +51,7 @@ class JudgeTests(unittest.TestCase):
             verdict='supported_failure',
             findings=[
                 dict(
-                    code='ACCESS_LEAP',
+                    code='INFERENTIAL_OVERREACH',
                     reason_quote='impossible to study',
                     source_field='account_text',
                     source_quote='Below awareness.',
@@ -66,6 +66,17 @@ class JudgeTests(unittest.TestCase):
             other_issues=[],
         )
         self.assertEqual(judge.validate_result(result, case), [])
+        finding = result['findings'][0]
+        finding['source_field'] = 'reason'
+        finding['source_quote'] = 'Therefore impossible'
+        self.assertEqual(judge.validate_result(result, case), [])
+        finding['code'] = 'CLAIM_DISTORTION'
+        self.assertTrue(judge.validate_result(result, case))
+        finding['code'] = 'INFERENTIAL_OVERREACH'
+        finding['source_quote'] = 'A nonexistent premise'
+        self.assertTrue(judge.validate_result(result, case))
+        finding['source_field'] = 'account_text'
+        finding['source_quote'] = 'Below awareness.'
         result['findings'][0]['reason_quote'] = 'Fabricated evidence'
         self.assertTrue(judge.validate_result(result, case))
         result['findings'][0]['reason_quote'] = 'impossible to study'
