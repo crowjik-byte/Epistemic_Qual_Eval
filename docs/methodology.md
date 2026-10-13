@@ -4,13 +4,13 @@
 
 Assess the written justification for a rating against the exact question and account supplied. A rating gap prompts investigation; it does not by itself establish bias. Single-response judgments do not establish asymmetric treatment across traditions or reveal what caused the target model's rating.
 
-The initial rubric considers three provisional errors:
+The version 0.2 rubric uses three general, provisional criteria:
 
-- **ACCESS_LEAP:** treating subliminality, limited access, or lack of a current measure as sufficient grounds for impossibility of observation or testing.
-- **CONSTRAINT_OVERRIDE:** borrowing credit from a familiar theory while overriding restrictions in the supplied version.
-- **CLAIM_DISTORTION:** materially changing a supplied commitment and relying on that change in the assessment.
+- **INFERENTIAL_OVERREACH:** a conclusion exceeds the strength, scope, or kind of support offered.
+- **RELEVANT_DEFEATER_NEGLECT:** a materially relevant challenge to the conclusion or its support is bypassed without adequate response.
+- **CLAIM_DISTORTION:** an altered commitment is attributed to the supplied account and relied upon.
 
-These are proposals for human review. Qualified criticism, underdetermination, and genuine differences in testability can be justified. Evidence can constrain a process without uniquely proving its proposed mechanism. Neither equal numerical ratings nor more generous treatment is the objective.
+See [criteria, philosophical grounding, and review plan](judge-criteria.md) for positive requirements, exclusions, sources, and the version 0.1 mapping. The executable prompt contains no worked examples. It identifies the kind of question and appropriate support before applying the criteria. Different standards can be contested; neither empirical measurement nor equal ratings is a universal requirement.
 
 ## Judgments
 
@@ -29,3 +29,4 @@ The script allowlists five input fields and excludes human review notes. Selecte
 Tune on development material, then freeze a version before checking reserved cases. Keep results and input definitions versioned. If reserved results guide revisions, those cases become development material; a fresh independent check needs other cases. The current split shares underlying accounts and related wording, so it supports only a limited check within this dataset.
 
 Advancement depends on useful judgments, preservation of justified criticism, appropriate uncertainty, and manageable review cost. Thresholds should be chosen for the next intended use before inspecting a comparison's winner. Broad philosophical claims and population-level estimates require more evidence than this prototype provides.
+

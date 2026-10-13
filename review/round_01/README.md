@@ -1,15 +1,17 @@
 # Review round 01
 
-This round uses 16 selected development cases, beginning with six initial contrasts. The packet, CSV, and human annotations are kept local pending approval to publish research data.
+This round uses 16 selected development cases, beginning with six initial contrasts.
+The [review packet](Review_Packet.md) and [review CSV](review_cases.csv) are included
+with the project owner's explicit publication approval.
 
-Copy the previously prepared files into these locations:
+The packet preserves the original version 0.1 criteria. Version 0.2 broadens them;
+read the [new criteria and mapping](../../docs/judge-criteria.md) alongside it.
+Keep existing review judgments in their original terms. For a new review, record
+the rubric version in human_explanation or start a new review round; do not silently
+convert old labels into reviewed judgments under broader definitions.
 
-- `Review_Packet.md` into this folder.
-- `review_cases.csv` into this folder.
-- `judge_development.csv` and `judge_reserved.csv` into `data/` at the repository root.
+Read the first six cases and add notes by case ID. Human columns are excluded from
+judge inputs. The private lookup and original coded data remain excluded from the
+repository. The reserved group is not used in this packet.
 
-These paths are ignored by Git. The files already supplied to the project owner remain the source for this round. The private lookup and original coded data stay separate from judge input.
-
-Read the packet's first six cases and add notes by case ID. The script ignores human-review columns. After the review, reconcile criteria and examples before adding them to the judge prompt. Keep a new round's cases and notes in a new `round_NN` folder, rather than overwriting this round.
-
-The script can run without any of these files using another CSV with the five required fields; see [running the judge](../../docs/running-the-judge.md). Its code-only tests use synthetic fixtures and do not require research data or API access.
+See [running the judge](../../docs/running-the-judge.md) for dry-run commands.

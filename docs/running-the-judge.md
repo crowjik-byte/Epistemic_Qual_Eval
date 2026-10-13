@@ -2,7 +2,7 @@
 
 This is a runnable prototype for reviewing the written reasons in the existing testability dataset. Its rubric is provisional and should be revised after Steve's review. It has not been validated as a reliable epistemic judge.
 
-Research CSVs and review examples are local-only. Follow [review setup](../review/round_01/README.md) before running the commands below.
+The approved research CSVs and review files are included. Read [review setup](../review/round_01/README.md) for the rubric-version distinction.
 
 ## Start with the review
 
@@ -10,7 +10,7 @@ Read `review/round_01/Review_Packet.md`, starting with the first six of 16 cases
 
 The sample deliberately includes apparent inference errors, defensible limitations, and ambiguous cases. It is not a frequency sample. Existing model identities, codes, and prior coding explanations are withheld; no reference verdicts have been filled in. Some cases were discussed in the conversation before this packet was created.
 
-Use `supported_failure`, `no_failure_established`, or `unresolved` in `human_verdict`. Optional failure codes are `ACCESS_LEAP`, `CONSTRAINT_OVERRIDE`, and `CLAIM_DISTORTION`; separate multiple codes with semicolons. For materiality, use `none`, `local_issue`, `weakens_justification`, or `unclear`. Other review fields are free text. The rules themselves can be disputed. Human judgments remain situated, reviewable references rather than universal ground truth.
+Use `supported_failure`, `no_failure_established`, or `unresolved` in `human_verdict`. The preserved packet uses version 0.1 codes. The current judge uses `INFERENTIAL_OVERREACH`, `RELEVANT_DEFEATER_NEGLECT`, and `CLAIM_DISTORTION` (see the [mapping](judge-criteria.md)); separate multiple codes with semicolons. For materiality, use `none`, `local_issue`, `weakens_justification`, or `unclear`. Other review fields are free text. The rules themselves can be disputed. Human judgments remain situated, reviewable references rather than universal ground truth.
 
 ## Prepare prompts without API calls
 
@@ -55,11 +55,11 @@ The script stops on the first malformed/truncated answer or API error, retaining
 
 ## Initial rubric and its limits
 
-The three codes identify an unwarranted leap from limited access to impossibility, credit that overrides an explicit restriction, and material distortion of the supplied claim. The judge must consider a reasonable defense of every alleged failure and explain why it is insufficient. It can preserve unresolved questions and note issues outside this rubric.
+The version 0.2 codes identify inferential overreach, neglect of relevant defeaters, and material distortion of the supplied claim. See [general criteria and philosophical grounding](judge-criteria.md). The judge must consider a reasonable defense of every alleged failure and explain why it is insufficient. It can preserve unresolved questions and note issues outside this rubric.
 
 The judge evaluates one response at a time. It does not establish asymmetric treatment across a pair, assign a corrected rating, explain the original model's hidden reasoning, or verify external empirical claims. A response may contain legitimate criticism alongside a local error. Demands for discriminating evidence can be justified, and more generous treatment is not automatically better. The rubric does not require equal ratings across traditions.
 
-The initial review examples are not embedded in the model prompt, and your human judgments are not silently added to it. After reviewing this packet, we can revise the criteria and choose a few reviewed examples explicitly. Keep the reserved file out of that process until a version is frozen. The earlier reserved split holds out an entire question variant, but still involves the same underlying accounts and related reasons; it is only a preliminary check.
+The initial review examples are not embedded in the model prompt, and your human judgments are not silently added to it. Prefer clear general descriptions; add a broadly interpretable example only if an observed ambiguity cannot adequately be resolved by revising those descriptions. Keep the reserved file out of that process until a version is frozen. The earlier reserved split holds out an entire question variant, but still involves the same underlying accounts and related reasons; it is only a preliminary check.
 
 ## Verification of this draft
 
@@ -69,3 +69,4 @@ API documentation consulted on 13 October 2026:
 
 - [Anthropic Messages API](https://platform.claude.com/docs/en/api/messages/create)
 - [OpenAI Responses API](https://developers.openai.com/api/reference/resources/responses/methods/create)
+

@@ -1,6 +1,6 @@
 [project]
 name = "epistemic-qual-eval"
-version = "0.1.0"
+version = "0.2.0"
 description = "Draft judge for the epistemic quality of LLM answers to difficult questions."
 requires-python = ">=3.10"
 dependencies = []
@@ -29,3 +29,4 @@ ignore = ["E501"]
 
 [tool.ruff.format]
 quote-style = "single"
+

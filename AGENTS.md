@@ -37,9 +37,13 @@ hand-format against it or reformat code in a different style.
 
 ## Data, privacy, and cost
 
-- Never commit anything under `runs/`, `private/`, `data/raw/`, the judge CSVs in
-  `data/`, review CSVs, or `Review_Packet.md` files. They are ignored on purpose;
-  never force-add them.
+- Never commit anything under `runs/`, `private/`, or `data/raw/`, or the
+  original coded data or private lookup.
+- The maintainer explicitly approved publication of `data/judge_development.csv`,
+  `data/judge_reserved.csv`, `review/round_01/Review_Packet.md`, and
+  `review/round_01/review_cases.csv`. This approval does not cover future
+  datasets, review annotations, or run outputs; obtain publication authorization
+  for those before committing them.
 - Never give the judge private lookup files, original coded data, or anything that
   reveals which model wrote a response.
 - Never commit API keys or `.env` files. Never print credentials.
@@ -56,3 +60,4 @@ hand-format against it or reformat code in a different style.
   effect on the rubric or prior runs.
 - When reviewing a PR, check correctness, the data and privacy rules above, test
   coverage, and that `scripts/check.sh` passes.
+
