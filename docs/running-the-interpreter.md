@@ -1,7 +1,8 @@
 # Question-only interpreter prototype
 
-Status: built and checked offline; not run against a live model or assessed for
-interpretive accuracy. Prototype approved for publication and an initial run on the home machine.
+Status: an earlier version produced two live interpretations reviewed by the project
+owner and assistant. Version 0.2.0 revises the instructions in response to that
+review; its semantic effects have not yet been tested live.
 
 ## Boundary and purpose
 
@@ -126,3 +127,30 @@ should use reviewed, versioned task criteria and explicit scoring rules shared
 across the models being compared. Discover recurring dimensions through these
 pilots and expert feedback rather than requiring a complete taxonomy up front.
 Generated reasons alone do not establish validity or score comparability.
+
+
+## Revision 0.2.0: next paired run
+
+Three general changes target issues identified in the first output review:
+
+- Require evidence for consequential ambiguities and distinguish stronger readings
+  from merely conceivable alternatives.
+- Explain why categories, familiar methods, or source status are relevant rather
+  than letting their labels settle adequacy.
+- Keep claims about support proportional to the evidence and consistent with their
+  stated limits; avoid treating reasonable judgment differences as contradictions.
+
+No account-specific answers or operationalization examples were added to the
+model instructions. The input and output schema are unchanged. The version 0.1.1
+Markdown-fence parser fix is preserved.
+
+On the home machine, pull the branch and use the same provider, model and settings
+as the first successful run. Use a new output folder, for example:
+
+    python src/task_interpreter.py --input inputs/initial_question.json --output-dir runs/interpreter/live_v020_01 --provider anthropic --model YOUR_MODEL_ID --repeats 2 --execute
+
+Retain the previous run. Check both attempts for the three targeted issues and
+for regressions: loss of genuine ambiguity, indiscriminate distrust of established
+methods, excessive hedging, or less useful checks. Do not interpret a pair of runs
+as a reliable accuracy estimate. Share review.md for discussion; keep raw outputs
+and credentials out of Git.
