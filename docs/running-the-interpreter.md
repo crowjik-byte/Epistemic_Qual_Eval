@@ -78,6 +78,10 @@ interpretation is correct. Invalid JSON, incomplete replies, invalid references,
 or API errors stop execution and preserve prior outputs. Correcting a failed run
 requires a new output directory. Outputs are local; no automatic publication.
 
+A reply wrapped in one outer Markdown code fence (```json ... ``` or ``` ... ```)
+is unwrapped before parsing; results.jsonl records this as fence_stripped and keeps
+the original response_text. Any other surrounding text is still invalid JSON.
+
 ## What to review after the first live run
 
 Compare attempts on requested judgment, scope, requirements, ambiguities, relevant

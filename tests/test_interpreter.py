@@ -169,6 +169,19 @@ class InterpreterTests(unittest.TestCase):
                 self.assertEqual(record['status'], 'invalid_output')
                 self.assertEqual(record['raw_response'], {'raw': True})
 
+    def test_one_outer_json_fence_is_accepted_and_recorded(self):
+        fenced = '```json\n' + json.dumps(RESULT, indent=1) + '\n```'
+        with tempfile.TemporaryDirectory() as tmp:
+            code, output, api = self.run_fixture(tmp, 'fenced', True, ({'raw': True}, fenced, True))
+            self.assertEqual(code, 0)
+            record = json.loads((output / 'results.jsonl').read_text().splitlines()[0])
+            self.assertEqual(record['status'], 'structured_output')
+            self.assertTrue(record['fence_stripped'])
+            self.assertEqual(record['response_text'], fenced)
+        for content in ['Here it is:\n' + fenced, '```python\n{}\n```', fenced + '\nDone.']:
+            with self.subTest(content=content):
+                self.assertEqual(interpreter.strip_fence(content), (content, False))
+
 
 if __name__ == '__main__':
     unittest.main()
