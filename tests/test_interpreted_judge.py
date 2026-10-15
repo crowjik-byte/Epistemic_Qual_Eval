@@ -186,6 +186,45 @@ class PilotTests(unittest.TestCase):
                     sorted(r['attempt'] for r in requests if r['case_id'] == cid), [1, 2]
                 )
 
+    def test_followup_for_another_wording_pins_named_cases(self):
+        import prepare_judge_followup as followup
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self.fixture(root)
+            question = root / 'question.json'
+            question.write_text(json.dumps({'question': QUESTION}))
+            meta = {
+                'question_sha256': judge.interpreter.sha(QUESTION.encode()),
+                'instructions_sha256': judge.interpreter.sha(
+                    judge.interpreter.INSTRUCTIONS.encode()
+                ),
+                'interpreter_version': judge.interpreter.VERSION,
+            }
+            manifest = root / 'manifest.json'
+            manifest.write_text(json.dumps(meta))
+            data = root / 'development.csv'
+            ids = ['C2', 'C3', 'C4', 'C5']
+            output = root / 'wording.json'
+            followup.prepare(root / 'source.jsonl', manifest, output, question, ids, data)
+            plan = json.loads(output.read_text())
+            self.assertEqual(plan['case_ids'], ids)
+            self.assertEqual(sorted(plan['case_sha256']), ids)
+            cases, requests = judge.prepare(data, root / 'source.jsonl', manifest, output)
+            self.assertEqual(len(requests), 8)
+            for bad_ids in [ids[:3], ['C2', 'C3', 'C4', 'C99']]:
+                with self.assertRaises(ValueError):
+                    followup.prepare(
+                        root / 'source.jsonl', manifest, root / 'bad.json', question, bad_ids, data
+                    )
+            other = root / 'other.json'
+            other.write_text(json.dumps({'question': 'A different wording?'}))
+            with self.assertRaises(ValueError):
+                followup.prepare(
+                    root / 'source.jsonl', manifest, root / 'bad.json', other, ids, data
+                )
+            self.assertFalse((root / 'bad.json').exists())
+
     def test_evidence_and_complete_check_coverage(self):
         payload = {
             'interpretation': RESULT,
