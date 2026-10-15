@@ -1,6 +1,21 @@
 # Current methodology
 
-## Scope
+## Current interpreter-to-judge pilot
+
+The current pilot uses unchanged generated interpretations reviewed on October 15,
+2026, not the older fixed failure codes below. `src/interpreted_judge.py` applies
+all candidate checks in the context of the full interpretation, preserves objections
+to that interpretation, and separates format from substantive findings. Eight
+purposefully selected development responses receive twelve evaluations: eight with
+attempt 1, two with attempt 2, and two repeats with attempt 1. Reserved cases remain
+untouched. See [pilot procedure](running-the-judge-pilot.md).
+
+Human review assesses the generated pipeline rather than manually repairing its
+intermediate outputs. Material errors should inform general mechanism changes.
+Hashes pin the accepted interpretations and selected source cases; no generated
+interpretations, original run outputs, or new response text are published here.
+
+## Earlier fixed-rubric scope
 
 Assess the written justification for a rating against the exact question and account supplied. A rating gap prompts investigation; it does not by itself establish bias. Single-response judgments do not establish asymmetric treatment across traditions or reveal what caused the target model's rating.
 
@@ -29,3 +44,4 @@ The script allowlists five input fields and excludes human review notes. Selecte
 Tune on development material, then freeze a version before checking reserved cases. Keep results and input definitions versioned. If reserved results guide revisions, those cases become development material; a fresh independent check needs other cases. The current split shares underlying accounts and related wording, so it supports only a limited check within this dataset.
 
 Advancement depends on useful judgments, preservation of justified criticism, appropriate uncertainty, and manageable review cost. Thresholds should be chosen for the next intended use before inspecting a comparison's winner. Broad philosophical claims and population-level estimates require more evidence than this prototype provides.
+

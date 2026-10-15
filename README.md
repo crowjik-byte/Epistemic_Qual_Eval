@@ -4,6 +4,20 @@ Development repo for building a system that can evaluate the epistemic quality o
 
 The current step is a small, human-reviewed judge of written reasons in an existing Yogācāra–predictive-processing dataset. The judge is a draft, not a validated evaluator. The immediate pre-sprint goal is a working judge followed by a useful prompt generator. Automated learning and broader domains can follow once those pieces work.
 
+## Question-only interpreter prototype
+
+The current first step is to interpret the question before evaluating responses.
+See [running the interpreter](docs/running-the-interpreter.md) and its
+[exact instructions](docs/interpreter-prompt-review.md). The initial input and
+offline tests are included. Live execution is explicit and uses your local API key.
+The interpreter now connects to a separate response-judge pilot. See
+[running the judge pilot](docs/running-the-judge-pilot.md) for the eight-case,
+twelve-evaluation setup. The older fixed-rubric judge below remains available
+for earlier experiments; it is not the current pilot.
+
+The current follow-up tests general check coverage with two fresh interpretations
+and four responses; see [follow-up instructions](docs/judge-followup.md).
+
 ## Start here
 
 1. Review the first six cases in the local round 01 packet (see [review setup](review/round_01/README.md)).
@@ -51,3 +65,5 @@ The reserved file is for a later frozen-version check, not prompt tuning. Resear
 Add a prompt-generator module when that stage begins. Add a learning module only when needed. The [development plan](docs/development-plan.md) separates critical work from exploratory branches and states advancement criteria.
 
 Existing repository license: [LICENSE](LICENSE).
+
+

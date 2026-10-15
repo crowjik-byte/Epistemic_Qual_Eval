@@ -1,0 +1,36 @@
+{
+  "question_sha256": "c7c1a41f4bcd22d548f57ffac26d32ecd04338dc57ac48ba6c6e4bd2f488b6b1",
+  "case_ids": [
+    "C000183",
+    "C000756",
+    "C000236",
+    "C000634",
+    "C000058",
+    "C000915",
+    "C000071",
+    "C000570"
+  ],
+  "case_sha256": {
+    "C000183": "f851406921c367e807f0da0e70843e2f1d095b8a16b6c5a83384266b929d932c",
+    "C000756": "d3fdcddb80a4537d930e2329de4ec059ff15f17abb5eb5024480c8627a06e20d",
+    "C000236": "58b5810141f392c538af2e4930eac919ea0599a768eaac98c9d279eedd21fa34",
+    "C000634": "010ad78a30d72afccdac55605af17c958aa09557a272690cad6cdb82afbb92f5",
+    "C000058": "d89cedefd1d2c4d1129b141d79a30deafaa51c95cc0d1b7f130a1cb7aea50bc3",
+    "C000915": "8b949f752c0da6f41136ddb73231b7f8078b07259fe470be4534499cf358a96e",
+    "C000071": "e3530d731c0c2ad1704fa4d8d2c93b96843515e07aa21286cfedbe9af055f476",
+    "C000570": "746b77f4c77c2cf17e4b20acaae7ab52e9cca1995f052b4df965d4cbdad168a5"
+  },
+  "interpretation_sha256": {
+    "1": "6ba54aa1044661039ef4457d7514f38d4cc1c6104bffdfaf121a0bf9fb6b8afe",
+    "2": "50a44424af1e0e0ff80db6dad50d3a0aa4a3673980efd870f1fc9639b6c6f45f"
+  },
+  "comparison_ids": [
+    "C000915",
+    "C000071"
+  ],
+  "repeat_ids": [
+    "C000915",
+    "C000071"
+  ],
+  "order_seed": 20261015
+}
