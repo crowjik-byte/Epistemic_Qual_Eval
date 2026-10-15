@@ -10,7 +10,10 @@ The current first step is to interpret the question before evaluating responses.
 See [running the interpreter](docs/running-the-interpreter.md) and its
 [exact instructions](docs/interpreter-prompt-review.md). The initial input and
 offline tests are included. Live execution is explicit and uses your local API key.
-The interpreter is not yet connected to the response judge below.
+The interpreter now connects to a separate response-judge pilot. See
+[running the judge pilot](docs/running-the-judge-pilot.md) for the eight-case,
+twelve-evaluation setup. The older fixed-rubric judge below remains available
+for earlier experiments; it is not the current pilot.
 
 ## Start here
 
@@ -59,4 +62,5 @@ The reserved file is for a later frozen-version check, not prompt tuning. Resear
 Add a prompt-generator module when that stage begins. Add a learning module only when needed. The [development plan](docs/development-plan.md) separates critical work from exploratory branches and states advancement criteria.
 
 Existing repository license: [LICENSE](LICENSE).
+
 
