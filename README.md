@@ -15,6 +15,9 @@ The interpreter now connects to a separate response-judge pilot. See
 twelve-evaluation setup. The older fixed-rubric judge below remains available
 for earlier experiments; it is not the current pilot.
 
+The current follow-up tests general check coverage with two fresh interpretations
+and four responses; see [follow-up instructions](docs/judge-followup.md).
+
 ## Start here
 
 1. Review the first six cases in the local round 01 packet (see [review setup](review/round_01/README.md)).

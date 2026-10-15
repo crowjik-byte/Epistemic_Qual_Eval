@@ -146,6 +146,46 @@ class PilotTests(unittest.TestCase):
                     judge.main(args)
                 self.assertFalse((root / 'dry').exists())
 
+    def test_followup_freezes_both_outputs_and_prepares_eight_calls(self):
+        import prepare_judge_followup as followup
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self.fixture(root)
+            (root / 'inputs').mkdir()
+            (root / 'inputs/judge_pilot.json').write_bytes((root / 'plan.json').read_bytes())
+            (root / 'inputs/initial_question.json').write_text(json.dumps({'question': QUESTION}))
+            meta = {
+                'question_sha256': judge.interpreter.sha(QUESTION.encode()),
+                'instructions_sha256': judge.interpreter.sha(
+                    judge.interpreter.INSTRUCTIONS.encode()
+                ),
+                'interpreter_version': judge.interpreter.VERSION,
+            }
+            manifest = root / 'manifest.json'
+            manifest.write_text(json.dumps(meta))
+            output = root / 'followup.json'
+            with (
+                patch.object(followup, '__file__', str(root / 'src/prepare_judge_followup.py')),
+                patch.object(followup, 'CASE_IDS', ['C0', 'C1', 'C6', 'C7']),
+            ):
+                followup.prepare(root / 'source.jsonl', manifest, output)
+                with self.assertRaises(FileExistsError):
+                    followup.prepare(root / 'source.jsonl', manifest, output)
+                meta['interpreter_version'] = 'old'
+                manifest.write_text(json.dumps(meta))
+                with self.assertRaises(ValueError):
+                    followup.prepare(root / 'source.jsonl', manifest, root / 'bad.json')
+            cases, requests = judge.prepare(
+                root / 'development.csv', root / 'source.jsonl', None, output
+            )
+            self.assertEqual(len(cases), 4)
+            self.assertEqual(len(requests), 8)
+            for cid in ['C0', 'C1', 'C6', 'C7']:
+                self.assertEqual(
+                    sorted(r['attempt'] for r in requests if r['case_id'] == cid), [1, 2]
+                )
+
     def test_evidence_and_complete_check_coverage(self):
         payload = {
             'interpretation': RESULT,

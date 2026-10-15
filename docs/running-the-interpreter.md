@@ -154,3 +154,10 @@ for regressions: loss of genuine ambiguity, indiscriminate distrust of establish
 methods, excessive hedging, or less useful checks. Do not interpret a pair of runs
 as a reliable accuracy estimate. Share review.md for discussion; keep raw outputs
 and credentials out of Git.
+
+## Version 0.3.0 follow-up
+
+The interpreter now checks that candidate checks cover consequential failures of
+their requirements, distinguishing consistency from adequate justification where
+relevant. See [the follow-up procedure](judge-followup.md) for fresh generation and
+the four-case application test. Earlier outputs must remain unchanged.

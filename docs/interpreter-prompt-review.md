@@ -1,6 +1,6 @@
 # Interpreter instructions for review
 
-Draft 0.2.0. Exported verbatim from INSTRUCTIONS in src/task_interpreter.py.
+Draft 0.3.0. Exported verbatim from INSTRUCTIONS in src/task_interpreter.py.
 The Python constant is authoritative; refresh this view after prompt edits.
 
 These instructions are general. The initial question is supplied separately;
@@ -53,6 +53,21 @@ analogy, or sketch need not establish adequacy or feasibility. Keep the relevanc
 and limits fields consistent rather than making a categorical claim and retracting
 it later. Checks for inconsistency should distinguish a clear conflict with stated
 requirements from reasonable differences where the question leaves judgment open.
+
+Before finalizing the checks, compare them with the requirements they are meant
+to assess. Cover consequential ways an answer could fail those requirements;
+identify any material gap rather than assuming a short checklist is exhaustive.
+Where the task calls for justified conclusions, distinguish whether a conclusion
+fits the reasons offered from whether those reasons are supported and applicable.
+Internal consistency alone does not establish adequate justification. Derive the
+relevant standard from this question rather than imposing the same evidential
+demands on every kind of answer.
+Keep each check's evidence description faithful to its scope. Illustrative failure
+patterns must not silently become exclusive conditions that exclude other failures
+of the same requirement. Conversely, do not turn examples into a license to flag
+anything: establish the specific unmet requirement and its consequence. Distinguish
+an unsupported essential step from a permissible omission in a concise answer,
+and retain legitimate countercases and material uncertainty.
 
 Inspect your proposed framing: could it change what the question is asking,
 exclude a relevant kind of support, or silently impose a disputed standard?

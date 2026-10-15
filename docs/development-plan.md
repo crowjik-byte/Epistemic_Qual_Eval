@@ -26,6 +26,14 @@ instability undermines the next step. Keep reserved data for a later frozen chec
 Human review may lead to general prompt/process changes; it must not silently
 replace generated interpretations with individually improved versions.
 
+## Current follow-up
+
+The initial pilot executed successfully but revealed a possible check-coverage gap.
+Interpreter 0.3.0 and judge 0.2.0 address general coverage and stage context.
+The [four-case follow-up](judge-followup.md) uses two fresh interpretations unchanged
+and eight judge calls. Advancement depends on defensible coverage and application,
+not reproducing preferred labels.
+
 ## Optional sprint branches
 
 - Automate proposals for rubric or example improvements, with human review and separate checks before adoption.
